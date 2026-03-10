@@ -139,4 +139,85 @@
         <div class="photo-card"><img src="66.jpg"><p>وعد عليا هفضل جنبك للأبد 💍</p></div>
         <div class="photo-card"><img src="7.jpg"><p>انتي أجمل صدفة في عمري 💖</p></div>
         <div class="photo-card"><img src="8.jpg"><p>بحبك لآخر نفس ❤️💋</p></div>
-        
+    
+        <button class="final-btn" onclick="openModal()">خلصتي؟ لسه في رسالة دوسي هنا ✨</button>
+    </div>
+</div>
+
+<div class="modal" id="msgModal">
+    <div class="main-card" style="background: white; border: 2px solid var(--accent);">
+        <h2 style="color: var(--accent);">رسالة لقلبك 💌</h2>
+        <p id="typing-text" style="line-height: 1.8; font-size: 17px; color: #444; min-height: 80px;"></p>
+        <button class="final-btn" onclick="closeModal()">إغلاق ×</button>
+    </div>
+</div>
+
+<script>
+    const P = "MYLOVE";
+    const longMessageText = "يا هبة، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑";
+    const audio = document.getElementById('music');
+
+    function showLogin() { 
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('main-container').style.display = 'flex';
+        spawnHearts();
+    }
+
+    function start() {
+        if(document.getElementById('pass').value === P) {
+            audio.play();
+            document.getElementById('music-control').style.display = 'flex';
+            document.getElementById('login-card').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            setInterval(updateTimer, 1000);
+        } else { alert("الباسورد غلط يا روحي! 😉"); }
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            document.getElementById('music-control').innerHTML = '🎵';
+        } else {
+            audio.pause();
+            document.getElementById('music-control').innerHTML = '🔇';
+        }
+    }
+
+    function updateTimer() {
+        const diff = new Date() - new Date(2025, 11, 21); // التاريخ 21/12/2025
+        document.getElementById('d').innerText = Math.floor(diff / 86400000);
+        document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
+        document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
+        document.getElementById('s').innerText = Math.floor((diff / 1000) % 60);
+    }
+
+    function spawnHearts() {
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.className = 'heart'; h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+        }, 300);
+    }
+
+    let i = 0;
+    function typeWriter() {
+        if (i < longMessageText.length) {
+            document.getElementById("typing-text").innerHTML += longMessageText.charAt(i);
+            i++; setTimeout(typeWriter, 50);
+        }
+    }
+
+    function openModal() { 
+        document.getElementById('msgModal').style.display = 'flex';
+        document.getElementById("typing-text").innerHTML = ""; 
+        i = 0; typeWriter();
+    }
+    
+    function closeModal() { document.getElementById('msgModal').style.display = 'none'; }
+</script>
+</body>
+</html>
+    
