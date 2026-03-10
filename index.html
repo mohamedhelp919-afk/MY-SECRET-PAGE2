@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إهداء خاص لـ SHIMAA 💖</title>
+    <title>إهداء خاص لـ RADWA 💖</title>
     <style>
         :root { --accent: #ff2e63; --glow: #00d1ff; --bg: #fff0f5; } 
         
@@ -49,7 +49,22 @@
         .timer-box { background: rgba(255, 255, 255, 0.5); padding: 10px; border-radius: 15px; width: 65px; border: 1px solid var(--accent); }
         .timer-box span { display: block; font-size: 20px; font-weight: bold; color: var(--accent); }
 
-        /* الكروت الأربعة */
+        /* زر الموسيقى العائم */
+        #music-control {
+            position: fixed; bottom: 20px; right: 20px;
+            width: 50px; height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: none; 
+            align-items: center; justify-content: center;
+            cursor: pointer; z-index: 4000;
+            box-shadow: 0 4px 15px rgba(255, 46, 99, 0.4);
+            font-size: 24px; color: white;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        /* الشبكة والكروت */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
         .gift-card { 
             background: rgba(255, 255, 255, 0.6); 
@@ -63,25 +78,9 @@
             background: var(--accent); color: white; 
             display: none; align-items: center; justify-content: center; 
             font-size: 13px; padding: 5px; 
-}
+        }
         .gift-card.revealed .msg-overlay { display: flex; }
 
-        /* زر الموسيقى العائم */
-        #music-control {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 50px; height: 50px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: none; /* يظهر فقط بعد الدخول */
-            align-items: center; justify-content: center;
-            cursor: pointer; z-index: 4000;
-            box-shadow: 0 4px 15px rgba(255, 46, 99, 0.4);
-            font-size: 24px; color: white;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
-        /* معرض الصور */
         .photo-card { background: rgba(255, 255, 255, 0.4); border-radius: 20px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.5); width: 90%; max-width: 380px; margin-bottom: 25px; }
         .photo-card img { width: 100%; border-radius: 15px; display: block; }
         .photo-card p { margin-top: 10px; color: var(--accent); font-weight: bold; }
@@ -106,7 +105,7 @@
 <div class="container" id="main-container">
     <div class="main-card" id="login-card">
         <h1>🔒</h1>
-        <h2 style="color: var(--accent);">جاهزة يا HEBA؟</h2>
+        <h2 style="color: var(--accent);">جاهزة يا RADWA؟</h2>
         <input type="password" id="pass" placeholder="اكتبي الباسورد">
         <button class="welcome-btn" onclick="start()">فتح المفاجأة ❤️</button>
     </div>
@@ -124,22 +123,22 @@
         </div>
 
         <div class="grid">
-            <div class="gift-card" onclick="this.classList.toggle('revealed')"><span>دا الاكرت الأول هنا🙋😂</span><div class="msg-overlay">محبتش</div></div>
-            <div class="gift-card" onclick="this.classList.toggle('revealed')"><span>الثاني</span><div class="msg-overlay">ولا بحب</div></div>
+            <div class="gift-card" onclick="this.classList.toggle('revealed')"><span>الأول</span><div class="msg-overlay">محبتش</div></div>
+            <div class="gift-card" onclick="this.classList.toggle('revealed')"><span>الثاني</span><div class="msg-overlay">ولا هحب</div></div>
             <div class="gift-card" onclick="this.classList.toggle('revealed')"><span>الثالث</span><div class="msg-overlay">ولا هحب حد</div></div>
             <div class="gift-card" onclick="this.classList.toggle('revealed')"><span>الرابع</span><div class="msg-overlay">زي ما حبيتك يا اجمل حاجه في حياتي❤️💋</div></div>
         </div>
 
         <h3 style="color: var(--accent);">👇 حياتي باختصار هنا</h3>
         <div class="photo-card"><img src="1.jpg"><p>ضحكتك بتنور دنيتي ❤️</p></div>
-        <div class="photo-card"><img src="2.jpg"><p>يا أغلى من روحي يا هبة ✨</p></div>
+        <div class="photo-card"><img src="2.jpg"><p>يا أغلى من روحي يا رضوى ✨</p></div>
         <div class="photo-card"><img src="3.jpg"><p>كل يوم معاكي هو عيد ليا 🎁</p></div>
         <div class="photo-card"><img src="4.jpg"><p>انتي الملكة اللي في قلبي 👑</p></div>
         <div class="photo-card"><img src="5.jpg"><p>عيني مش شايفة غيرك في الدنيا 😍</p></div>
-        <div class="photo-card"><img src="66.jpg"><p>وعد عليا هفضل جنبك للأبد 💍</p></div>
+        <div class="photo-card"><img src="6.jpg"><p>وعد عليا هفضل جنبك للأبد 💍</p></div>
         <div class="photo-card"><img src="7.jpg"><p>انتي أجمل صدفة في عمري 💖</p></div>
         <div class="photo-card"><img src="8.jpg"><p>بحبك لآخر نفس ❤️💋</p></div>
-    
+
         <button class="final-btn" onclick="openModal()">خلصتي؟ لسه في رسالة دوسي هنا ✨</button>
     </div>
 </div>
@@ -153,8 +152,8 @@
 </div>
 
 <script>
-    const P = "MYLOVE";
-    const longMessageText = "يا هبة، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑";
+    const P = "0000";
+    const longMessageText = "يا رضوى، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑";
     const audio = document.getElementById('music');
 
     function showLogin() { 
@@ -184,7 +183,7 @@
     }
 
     function updateTimer() {
-        const diff = new Date() - new Date(2025, 11, 21); // التاريخ 21/12/2025
+        const diff = new Date() - new Date(2025, 6, 1); // 1/7/2025
         document.getElementById('d').innerText = Math.floor(diff / 86400000);
         document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
         document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
@@ -220,4 +219,3 @@
 </script>
 </body>
 </html>
-    
