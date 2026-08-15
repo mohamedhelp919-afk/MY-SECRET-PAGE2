@@ -40,7 +40,7 @@
         .welcome-btn:hover { transform: scale(1.05); }
 
         /* حاوية المحتوى */
-        .container { display: none; flex-direction: column; align-items: center; width: 95%; max-width: 500px; padding-top: 20px; padding-bottom: 120px; }
+        .container { display: none; flex-direction: column; align-items: center; width: 95%; max-width: 500px; padding-top: 20px; padding-bottom: 140px; }
         
         .main-card { 
             width: 100%;
@@ -57,31 +57,54 @@
         .timer-box { background: rgba(255,255,255,0.6); padding: 15px 5px; border-radius: 20px; width: 70px; border: 1px solid var(--accent); }
         .timer-box span { display: block; font-size: 22px; font-weight: bold; color: var(--accent); }
 
-        /* مشغل الموسيقى (شيك ورايق) */
+        /* مشغل الموسيقى الجديد الأنيق */
         #music-player-bar {
             position: fixed; bottom: 20px;
-            width: 90%; max-width: 400px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 25px;
-            padding: 15px;
+            width: 90%; max-width: 380px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 30px;
+            padding: 12px 20px;
             display: none; 
-            align-items: center; gap: 15px;
+            flex-direction: column;
+            gap: 8px;
             z-index: 4000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 46, 99, 0.2);
+            box-shadow: 0 12px 30px rgba(255, 46, 99, 0.25);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            direction: ltr;
         }
         .player-btn {
-            background: var(--accent); color: white; border: none;
-            width: 45px; height: 45px; border-radius: 50%;
-            cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #ff2e63, #ff85a2);
+            color: white; border: none;
+            width: 42px; height: 42px; border-radius: 50%;
+            cursor: pointer; font-size: 16px; 
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 46, 99, 0.3);
+            transition: all 0.2s ease;
+        }
+        .player-btn:active { transform: scale(0.92); }
+        .player-btn.skip-btn {
+            width: 34px; height: 34px;
+            background: rgba(255, 46, 99, 0.15);
+            color: var(--accent);
+            font-size: 12px; font-weight: bold;
+            box-shadow: none;
         }
         .seek-slider {
-            flex-grow: 1; height: 6px; border-radius: 5px;
-            background: #ddd; appearance: none;
+            width: 100%; height: 6px; border-radius: 10px;
+            background: rgba(255, 46, 99, 0.15); appearance: none;
+            outline: none; cursor: pointer;
         }
         .seek-slider::-webkit-slider-thumb {
-            appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent);
+            appearance: none; width: 14px; height: 14px; border-radius: 50%; 
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
         }
 
         /* الكروت */
@@ -109,9 +132,14 @@
 
 <audio id="music" loop><source src="LOVE.mp3" type="audio/mpeg"></audio>
 
+<!-- مشغل الموسيقى المطور والشيك -->
 <div id="music-player-bar">
-    <button class="player-btn" onclick="toggleMusic()" id="play-pause-btn">⏸</button>
     <input type="range" id="seek-bar" class="seek-slider" value="0" min="0" max="100" oninput="seekAudio()">
+    <div class="player-controls">
+        <button class="player-btn skip-btn" onclick="skipAudio(-10)">-10s</button>
+        <button class="player-btn" onclick="toggleMusic()" id="play-pause-btn">⏸</button>
+        <button class="player-btn skip-btn" onclick="skipAudio(10)">+10s</button>
+    </div>
 </div>
 
 <div id="welcome-screen">
@@ -203,6 +231,10 @@
             audio.pause();
             playBtn.innerHTML = '▶';
         }
+    }
+
+    function skipAudio(seconds) {
+        audio.currentTime = Math.min(Math.max(audio.currentTime + seconds, 0), audio.duration || 0);
     }
 
     audio.ontimeupdate = function() {
