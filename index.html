@@ -5,117 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إهداء خاص لـ 𝐵𝑎𝑛𝑜𝑢𝑡𝑦 💖</title>
     <style>
-        :root { --accent: #ff2e63; --glow: #00d1ff; --bg: #fff0f5; } 
+        :root { 
+            --accent: #ff2e63; 
+            --primary: #ff85a2; 
+            --glass: rgba(255, 255, 255, 0.7);
+            --bg: #fff0f5; 
+        } 
         
         body { 
-            background-color: var(--bg); 
+            background: linear-gradient(135deg, #fff0f5, #ffe4e6); 
             color: #444; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             margin: 0; padding: 0; 
             min-height: 100vh; 
-            overflow-x: hidden; 
             display: flex; flex-direction: column; align-items: center; 
         }
         
-        /* القلوب المتساقطة */
-        .heart { position: fixed; color: var(--accent); font-size: 15px; pointer-events: none; animation: fall linear forwards; z-index: 1; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        /* القلوب */
+        .heart { position: fixed; color: var(--accent); font-size: 20px; pointer-events: none; animation: fall linear forwards; z-index: 1; opacity: 0.6; }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
 
         /* شاشة البداية */
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(255,192,203,0.3), rgba(255,192,203,0.3)), url('images.jpg');
-            background-size: cover; background-position: center;
+            background: linear-gradient(rgba(255,192,203,0.5), rgba(255,192,203,0.5));
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 2000; text-align: center; padding: 20px; transition: 0.8s;
+            z-index: 2000; text-align: center; padding: 20px;
         }
-        .welcome-btn { background: var(--accent); color: white; border: none; padding: 15px 45px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 0 25px var(--accent); }
+        .welcome-btn { 
+            background: var(--accent); color: white; border: none; padding: 15px 40px; 
+            border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; 
+            box-shadow: 0 10px 20px rgba(255, 46, 99, 0.3); transition: 0.3s;
+        }
+        .welcome-btn:hover { transform: scale(1.05); }
 
         /* حاوية المحتوى */
-        .container { display: none; flex-direction: column; align-items: center; width: 100%; z-index: 10; padding-bottom: 120px; position: relative; }
+        .container { display: none; flex-direction: column; align-items: center; width: 95%; max-width: 500px; padding-top: 20px; padding-bottom: 120px; }
         
         .main-card { 
-            width: 90%; max-width: 400px; 
-            background: rgba(255, 255, 255, 0.25); 
-            border: 1px solid rgba(255, 46, 99, 0.15); 
-            border-radius: 35px; padding: 20px; 
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            text-align: center; margin: 15px 0; 
-            box-shadow: 0 8px 32px rgba(255, 46, 99, 0.05);
+            width: 100%;
+            background: var(--glass); 
+            border: 1px solid rgba(255, 255, 255, 0.5); 
+            border-radius: 30px; padding: 25px; 
+            backdrop-filter: blur(15px);
+            text-align: center; margin-bottom: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
         }
 
         /* العداد */
         .timer-container { display: flex; justify-content: space-around; margin: 20px 0; }
-        .timer-box { background: rgba(255, 255, 255, 0.5); padding: 10px; border-radius: 15px; width: 65px; border: 1px solid var(--accent); }
-        .timer-box span { display: block; font-size: 20px; font-weight: bold; color: var(--accent); }
+        .timer-box { background: rgba(255,255,255,0.6); padding: 15px 5px; border-radius: 20px; width: 70px; border: 1px solid var(--accent); }
+        .timer-box span { display: block; font-size: 22px; font-weight: bold; color: var(--accent); }
 
-        /* مشغل الموسيقى المطور */
+        /* مشغل الموسيقى (شيك ورايق) */
         #music-player-bar {
-            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 380px;
-            background: rgba(255, 255, 255, 0.85);
-            border: 2px solid var(--accent);
+            position: fixed; bottom: 20px;
+            width: 90%; max-width: 400px;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 25px;
-            padding: 8px 15px;
+            padding: 15px;
             display: none; 
-            align-items: center; justify-content: space-between;
+            align-items: center; gap: 15px;
             z-index: 4000;
-            box-shadow: 0 4px 20px rgba(255, 46, 99, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
-            direction: ltr;
+            border: 1px solid rgba(255, 46, 99, 0.2);
         }
         .player-btn {
             background: var(--accent); color: white; border: none;
-            width: 35px; height: 35px; border-radius: 50%;
-            cursor: pointer; font-size: 14px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
+            width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
         }
         .seek-slider {
-            width: 100%; margin: 0 10px;
-            accent-color: var(--accent);
-            cursor: pointer;
+            flex-grow: 1; height: 6px; border-radius: 5px;
+            background: #ddd; appearance: none;
+        }
+        .seek-slider::-webkit-slider-thumb {
+            appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--accent);
         }
 
-        /* الشبكة والكروت */
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        /* الكروت */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
         .gift-card { 
-            background: rgba(255, 255, 255, 0.6); 
-            border-radius: 15px; border: 1px solid var(--accent); 
-            height: 75px; display: flex; align-items: center; justify-content: center; 
-            cursor: pointer; position: relative; overflow: hidden; 
-            font-weight: bold; color: var(--accent);
+            background: white; border-radius: 20px; border: 2px solid var(--accent); 
+            height: 80px; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; font-weight: bold; color: var(--accent); transition: 0.3s;
         }
-        .msg-overlay { 
-            position: absolute; top:0; left:0; width:100%; height:100%; 
-            background: var(--accent); color: white; 
-            display: none; align-items: center; justify-content: center; 
-            font-size: 13px; padding: 5px; 
-        }
-        .gift-card.revealed .msg-overlay { display: flex; }
+        .gift-card.revealed { background: var(--accent); color: white; }
+        .msg-overlay { display: none; }
+        .gift-card.revealed .msg-overlay { display: block; font-size: 12px; }
+        .gift-card.revealed span { display: none; }
 
-        .photo-card { background: rgba(255, 255, 255, 0.4); border-radius: 20px; padding: 10px; border: 1px solid rgba(255, 255, 255, 0.5); width: 90%; max-width: 380px; margin-bottom: 25px; }
-        .photo-card img { width: 100%; border-radius: 15px; display: block; }
-        .photo-card p { margin-top: 10px; color: var(--accent); font-weight: bold; }
+        .photo-card { background: white; border-radius: 25px; padding: 15px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .photo-card img { width: 100%; border-radius: 20px; }
+        
+        input { width: 85%; padding: 15px; border-radius: 20px; border: 2px solid var(--accent); margin-bottom: 20px; outline: none; }
+        .final-btn { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer; }
 
-        input { width: 80%; padding: 12px; border-radius: 15px; border: 1px solid var(--accent); background: white; text-align: center; margin-bottom: 20px; outline: none; }
-        .final-btn { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 50px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; }
-
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,240,245,0.9); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
 
 <audio id="music" loop><source src="LOVE.mp3" type="audio/mpeg"></audio>
 
-<!-- شريط التحكم بالموسيقى -->
 <div id="music-player-bar">
     <button class="player-btn" onclick="toggleMusic()" id="play-pause-btn">⏸</button>
     <input type="range" id="seek-bar" class="seek-slider" value="0" min="0" max="100" oninput="seekAudio()">
 </div>
 
 <div id="welcome-screen">
-    <h2 style="color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.4); padding: 20px;">🤍 يوم ما عرفنا بعض كان أسعد يوم في حياتي ❤️</h2>
+    <h2 style="color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); padding: 20px;">🤍 يوم ما عرفنا بعض كان أسعد يوم في حياتي ❤️</h2>
     <button class="welcome-btn" onclick="showLogin()">ادخلي يا عمري ✨</button>
 </div>
 
@@ -165,7 +165,7 @@
 </div>
 
 <div class="modal" id="msgModal">
-    <div class="main-card" style="background: white; border: 2px solid var(--accent);">
+    <div class="main-card" style="background: white;">
         <h2 style="color: var(--accent);">رسالة لقلبك 💌</h2>
         <p id="typing-text" style="line-height: 1.8; font-size: 17px; color: #444; min-height: 80px;"></p>
         <button class="final-btn" onclick="closeModal()">إغلاق ×</button>
@@ -218,7 +218,7 @@
     }
 
     function updateTimer() {
-        const diff = new Date() - new Date(2025, 6, 1); // 1/7/2025
+        const diff = new Date() - new Date(2025, 6, 1);
         document.getElementById('d').innerText = Math.floor(diff / 86400000);
         document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
         document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
