@@ -32,7 +32,7 @@
         .welcome-btn { background: var(--accent); color: white; border: none; padding: 15px 45px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 0 25px var(--accent); }
 
         /* حاوية المحتوى */
-        .container { display: none; flex-direction: column; align-items: center; width: 100%; z-index: 10; padding-bottom: 80px; position: relative; }
+        .container { display: none; flex-direction: column; align-items: center; width: 100%; z-index: 10; padding-bottom: 120px; position: relative; }
         
         .main-card { 
             width: 90%; max-width: 400px; 
@@ -49,20 +49,33 @@
         .timer-box { background: rgba(255, 255, 255, 0.5); padding: 10px; border-radius: 15px; width: 65px; border: 1px solid var(--accent); }
         .timer-box span { display: block; font-size: 20px; font-weight: bold; color: var(--accent); }
 
-        /* زر الموسيقى العائم */
-        #music-control {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 50px; height: 50px;
-            background: var(--accent);
-            border-radius: 50%;
+        /* مشغل الموسيقى المطور */
+        #music-player-bar {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 380px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            padding: 8px 15px;
             display: none; 
-            align-items: center; justify-content: center;
-            cursor: pointer; z-index: 4000;
-            box-shadow: 0 4px 15px rgba(255, 46, 99, 0.4);
-            font-size: 24px; color: white;
-            animation: pulse 2s infinite;
+            align-items: center; justify-content: space-between;
+            z-index: 4000;
+            box-shadow: 0 4px 20px rgba(255, 46, 99, 0.3);
+            backdrop-filter: blur(10px);
+            direction: ltr;
         }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .player-btn {
+            background: var(--accent); color: white; border: none;
+            width: 35px; height: 35px; border-radius: 50%;
+            cursor: pointer; font-size: 14px; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .seek-slider {
+            width: 100%; margin: 0 10px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
 
         /* الشبكة والكروت */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
@@ -95,7 +108,11 @@
 
 <audio id="music" loop><source src="LOVE.mp3" type="audio/mpeg"></audio>
 
-<div id="music-control" onclick="toggleMusic()">🎵</div>
+<!-- شريط التحكم بالموسيقى -->
+<div id="music-player-bar">
+    <button class="player-btn" onclick="toggleMusic()" id="play-pause-btn">⏸</button>
+    <input type="range" id="seek-bar" class="seek-slider" value="0" min="0" max="100" oninput="seekAudio()">
+</div>
 
 <div id="welcome-screen">
     <h2 style="color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.4); padding: 20px;">🤍 يوم ما عرفنا بعض كان أسعد يوم في حياتي ❤️</h2>
@@ -159,6 +176,8 @@
     const P = "2082005";
     const longMessageText = "يا رضوى، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑";
     const audio = document.getElementById('music');
+    const seekBar = document.getElementById('seek-bar');
+    const playBtn = document.getElementById('play-pause-btn');
 
     function showLogin() { 
         document.getElementById('welcome-screen').style.display = 'none';
@@ -169,7 +188,7 @@
     function start() {
         if(document.getElementById('pass').value === P) {
             audio.play();
-            document.getElementById('music-control').style.display = 'flex';
+            document.getElementById('music-player-bar').style.display = 'flex';
             document.getElementById('login-card').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             setInterval(updateTimer, 1000);
@@ -179,10 +198,22 @@
     function toggleMusic() {
         if (audio.paused) {
             audio.play();
-            document.getElementById('music-control').innerHTML = '🎵';
+            playBtn.innerHTML = '⏸';
         } else {
             audio.pause();
-            document.getElementById('music-control').innerHTML = '🔇';
+            playBtn.innerHTML = '▶';
+        }
+    }
+
+    audio.ontimeupdate = function() {
+        if (audio.duration) {
+            seekBar.value = (audio.currentTime / audio.duration) * 100;
+        }
+    };
+
+    function seekAudio() {
+        if (audio.duration) {
+            audio.currentTime = (seekBar.value / 100) * audio.duration;
         }
     }
 
