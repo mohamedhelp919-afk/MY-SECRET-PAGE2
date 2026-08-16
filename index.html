@@ -8,7 +8,7 @@
         :root { 
             --accent: #ff2e63; 
             --primary: #ff85a2; 
-            --glass: rgba(255, 255, 255, 0.7);
+            --glass: rgba(255, 255, 255, 0.75);
             --bg: #fff0f5; 
         } 
         
@@ -19,6 +19,19 @@
             margin: 0; padding: 0; 
             min-height: 100vh; 
             display: flex; flex-direction: column; align-items: center; 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية النجوم المضيئة التفاعلية */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* القلوب */
@@ -37,25 +50,27 @@
             background: var(--accent); color: white; border: none; padding: 15px 40px; 
             border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; 
             box-shadow: 0 10px 20px rgba(255, 46, 99, 0.3); transition: 0.3s;
+            position: relative; z-index: 2;
         }
-        .welcome-btn:hover { transform: scale(1.05); }
+        .welcome-btn:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 46, 99, 0.6); }
 
         /* حاوية المحتوى */
-        .container { display: none; flex-direction: column; align-items: center; width: 95%; max-width: 500px; padding-top: 20px; padding-bottom: 140px; }
+        .container { display: none; flex-direction: column; align-items: center; width: 95%; max-width: 500px; padding-top: 20px; padding-bottom: 140px; position: relative; z-index: 2; }
         
         .main-card { 
             width: 100%;
             background: var(--glass); 
-            border: 1px solid rgba(255, 255, 255, 0.5); 
+            border: 1px solid rgba(255, 255, 255, 0.8); 
             border-radius: 30px; padding: 25px; 
             backdrop-filter: blur(15px);
             text-align: center; margin-bottom: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(255, 46, 99, 0.15);
+            box-sizing: border-box;
         }
 
         /* العداد */
         .timer-container { display: flex; justify-content: space-around; margin: 20px 0; }
-        .timer-box { background: rgba(255,255,255,0.6); padding: 15px 5px; border-radius: 20px; width: 70px; border: 1px solid var(--accent); }
+        .timer-box { background: rgba(255,255,255,0.7); padding: 15px 5px; border-radius: 20px; width: 70px; border: 1px solid var(--accent); box-shadow: 0 4px 10px rgba(255, 46, 99, 0.1); }
         .timer-box span { display: block; font-size: 22px; font-weight: bold; color: var(--accent); }
 
         /* مشغل الموسيقى الجديد الأنيق */
@@ -72,6 +87,7 @@
             box-shadow: 0 12px 30px rgba(255, 46, 99, 0.25);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.8);
+            box-sizing: border-box;
         }
         .player-controls {
             display: flex;
@@ -114,22 +130,80 @@
             background: white; border-radius: 20px; border: 2px solid var(--accent); 
             height: 80px; display: flex; align-items: center; justify-content: center; 
             cursor: pointer; font-weight: bold; color: var(--accent); transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .gift-card.revealed { background: var(--accent); color: white; }
+        .gift-card.revealed { background: var(--accent); color: white; transform: scale(0.98); }
         .msg-overlay { display: none; }
         .gift-card.revealed .msg-overlay { display: block; font-size: 12px; }
         .gift-card.revealed span { display: none; }
 
-        .photo-card { background: white; border-radius: 25px; padding: 15px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .photo-card img { width: 100%; border-radius: 20px; }
+        /* ألبوم الصور المتحرك 3D الجديد */
+        .3d-carousel-container {
+            width: 100%;
+            margin: 25px 0;
+            position: relative;
+        }
+        .carousel-view {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 25px;
+            position: relative;
+            background: white;
+            box-shadow: 0 10px 25px rgba(255, 46, 99, 0.15);
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            opacity: 0.3;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: scale(0.9);
+        }
+        .carousel-slide.active-slide {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .carousel-nav-btn {
+            position: absolute;
+            top: 45%;
+            transform: translateY(-50%);
+            background: rgba(255, 46, 99, 0.8);
+            color: white;
+            border: none;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: 0.2s;
+        }
+        .carousel-nav-btn:hover { background: var(--accent); transform: translateY(-50%) scale(1.1); }
+        .prev-slide { right: 15px; }
+        .next-slide { left: 15px; }
+
+        /* الستايل الأصلي للصور */
+        .photo-card { background: white; border-radius: 25px; padding: 15px; margin-bottom: 0px; box-shadow: none; }
+        .photo-card img { width: 100%; border-radius: 20px; height: 300px; object-fit: cover; }
         
         input { width: 85%; padding: 15px; border-radius: 20px; border: 2px solid var(--accent); margin-bottom: 20px; outline: none; }
-        .final-btn { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer; }
+        .final-btn { background: var(--accent); color: white; border: none; padding: 15px; border-radius: 50px; width: 100%; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(255, 46, 99, 0.3); transition: 0.3s; }
+        .final-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 46, 99, 0.5); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 3000; justify-content: center; align-items: center; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 5000; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
+
+<!-- الخلفية المضيئة المتحركة -->
+<canvas id="bg-canvas"></canvas>
 
 <audio id="music" loop><source src="LOVE.mp3" type="audio/mpeg"></audio>
 
@@ -176,18 +250,44 @@
         </div>
 
         <h3 style="color: var(--accent);">👇 حياتي باختصار هنا</h3>
-        <div class="photo-card"><img src="1.jpg"><p>‏لو كانت عيناكي محيطاً لغمرت نفسي فيه دون ترددٍ لفرصه العوم في حبك ساخاطر ب الغرق كل يومٍ🥺♥️♥️♥️♥️</p></div>
-        <div class="photo-card"><img src="2.jpg"><p>يا أغلى من روحي يا رضوى ✨</p></div>
-        <div class="photo-card"><img src="3.jpg"><p>كل يوم معاكي هو عيد ليا 🎁</p></div>
-        <div class="photo-card"><img src="4.jpg"><p>‏وعينيك خمرا بلا كؤووس تسكرو
+        
+        <!-- ألبوم صور متحرك وسلس يُبرز الذكريات بنفس المحتوى وبشكل جذاب -->
+        <div class="3d-carousel-container">
+            <button class="carousel-nav-btn prev-slide" onclick="moveCarousel(-1)">❯</button>
+            <button class="carousel-nav-btn next-slide" onclick="moveCarousel(1)">❮</button>
+            <div class="carousel-view">
+                <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-slide active-slide">
+                        <div class="photo-card"><img src="1.jpg"><p>‏لو كانت عيناكي محيطاً لغمرت نفسي فيه دون ترددٍ لفرصه العوم في حبك ساخاطر ب الغرق كل يومٍ🥺♥️♥️♥️♥️</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="2.jpg"><p>يا أغلى من روحي يا رضوى ✨</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="3.jpg"><p>كل يوم معاكي هو عيد ليا 🎁</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="4.jpg"><p>‏وعينيك خمرا بلا كؤووس تسكرو
 ماكنت أؤمن بلعيون وفعلها
 حتى دهتني في الهوا عيناكي
 سود لؤلؤتاها تشع نورا
 كقمرا فوق ليلي يعتلي♥️♥️♥️♥️❤️❤️❤️🥺🥺</p></div>
-        <div class="photo-card"><img src="5.jpg"><p>يا اجمل واحلي وارق واطيب حاجه في حياتي 🥺</p></div>
-        <div class="photo-card"><img src="6.jpg"><p>وعد عليا هفضل جنبك للأبد 💍</p></div>
-        <div class="photo-card"><img src="7.jpg"><p>انتي أجمل صدفة في عمري 💖</p></div>
-        <div class="photo-card"><img src="88.jpg"><p>بحبك لآخر نفس ❤️💋</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="5.jpg"><p>يا اجمل واحلي وارق واطيب حاجه في حياتي 🥺</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="6.jpg"><p>وعد عليا هفضل جنبك للأبد 💍</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="7.jpg"><p>انتي أجمل صدفة في عمري 💖</p></div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="photo-card"><img src="88.jpg"><p>بحبك لآخر نفس ❤️💋</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <button class="final-btn" onclick="openModal()">خلصتي؟ لسه في رسالة دوسي هنا ✨</button>
     </div>
@@ -212,6 +312,7 @@
         document.getElementById('welcome-screen').style.display = 'none';
         document.getElementById('main-container').style.display = 'flex';
         spawnHearts();
+        initCanvas(); // تشغيل خلفية الجسيمات
     }
 
     function start() {
@@ -221,6 +322,7 @@
             document.getElementById('login-card').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             setInterval(updateTimer, 1000);
+            startCarouselAutoPlay(); // تشغيل تحريك الألبوم تلقائياً
         } else { alert("الباسورد غلط يا روحي! 😉"); }
     }
 
@@ -284,6 +386,80 @@
     }
     
     function closeModal() { document.getElementById('msgModal').style.display = 'none'; }
+
+    /* البرمجة الخاصة بالألبوم المتحرك الجديد */
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const track = document.getElementById('carouselTrack');
+    let autoSlideTimer;
+
+    function updateCarousel() {
+        if(!track) return;
+        track.style.transform = `translateX(${currentSlide * 100}%)`;
+        slides.forEach((s, idx) => {
+            if(idx === currentSlide) {
+                s.classList.add('active-slide');
+            } else {
+                s.classList.remove('active-slide');
+            }
+        });
+    }
+
+    function moveCarousel(direction) {
+        currentSlide += direction;
+        if(currentSlide < 0) currentSlide = slides.length - 1;
+        if(currentSlide >= slides.length) currentSlide = 0;
+        updateCarousel();
+    }
+
+    function startCarouselAutoPlay() {
+        autoSlideTimer = setInterval(() => {
+            moveCarousel(1);
+        }, 4000);
+    }
+
+    /* البرمجة الخاصة برسم النجوم والجسيمات المضيئة في الخلفية */
+    function initCanvas() {
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        for(let p = 0; p < 45; p++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 0.6,
+                dy: (Math.random() - 0.5) * 0.6,
+                alpha: Math.random() * 0.7 + 0.3
+            });
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 133, 162, ${p.alpha})`;
+                ctx.fill();
+
+                p.x += p.dx;
+                p.y += p.dy;
+
+                if(p.x < 0 || p.x > width) p.dx *= -1;
+                if(p.y < 0 || p.y > height) p.dy *= -1;
+            });
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+    }
 </script>
 </body>
 </html>
