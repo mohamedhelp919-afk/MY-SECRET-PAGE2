@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عالمنا الخاص | Banouty Supreme Luxury Edition 💎💖</title>
+    <title>عالمنا الخاص | Banouty Supreme Edition 💎💖</title>
     
-    <!-- المكتبات الخارجية والخطوط الفاخرة -->
+    <!-- المكتبات الخارجية والخطوط -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
     
     <style>
         /* ==========================================================================
-           1. المتغيرات الهيكلية والثيمات الفاخرة (CSS Variables & Themes)
+           1. المتغيرات الهيكلية والثيمات (CSS Variables & Themes)
            ========================================================================== */
         :root { 
             --accent: #ff2e63; 
@@ -195,7 +195,7 @@
         }
 
         /* ==========================================================================
-           5. شاشة الترحب الفاخرة ومدخل الباسورد (Luxury Intro & Gatekeeper)
+           5. شاشة الترحيب ومدخل الباسورد (Intro & Gatekeeper)
            ========================================================================== */
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -267,7 +267,7 @@
         .section-header i { font-size: 24px; color: var(--accent); }
 
         /* ==========================================================================
-           7. العداد الكوني الفاخر مع الأجزاء (Cosmic Live Timer System)
+           7. العداد الكوني مع الأجزاء (Cosmic Live Timer System)
            ========================================================================== */
         .timer-container { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 25px 0; }
         .timer-box { 
@@ -322,7 +322,6 @@
             background: var(--accent); box-shadow: 0 0 10px var(--accent);
         }
 
-        /* نظام الخلفيات الصوتية الأتموسفيرية */
         .ambient-selector {
             display: flex; justify-content: center; gap: 10px; margin-top: 5px; flex-wrap: wrap;
         }
@@ -351,7 +350,7 @@
         .gift-card.revealed span { display: none; }
 
         /* ==========================================================================
-           10. الألبوم التفاعلي والـ Carousel الفاخر (Dynamic 3D Carousel & Lightbox)
+           10. الألبوم التفاعلي والـ Carousel (Dynamic 3D Carousel & Lightbox)
            ========================================================================== */
         .carousel-container { position: relative; width: 100%; overflow: hidden; border-radius: 28px; margin: 25px 0; box-shadow: 0 12px 30px rgba(0,0,0,0.15); }
         .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -412,24 +411,34 @@
         .piano-key:active, .piano-key.active { background: var(--primary); color: white; transform: translateY(5px); }
 
         /* ==========================================================================
-           14. لعبة صيد القلوب والتفاعل الأركيد (Heart Catcher Game)
+           14. لعبة مزرعة القلوب والورد السحرية (Joy Garden Game)
            ========================================================================== */
-        .game-box {
-            position: relative; width: 100%; height: 260px; background: linear-gradient(to bottom, #111, #222);
-            border-radius: 25px; overflow: hidden; border: 2px solid var(--accent); margin: 20px 0;
-            display: none; flex-direction: column; align-items: center; justify-content: center;
+        .garden-game-wrapper {
+            position: relative; width: 100%; background: linear-gradient(180deg, #ffe0e9 0%, #fff5f8 100%);
+            border-radius: 25px; border: 2px solid var(--accent); margin: 20px 0; padding: 20px;
+            display: none; flex-direction: column; align-items: center; box-shadow: inset 0 0 20px rgba(255, 46, 99, 0.1);
         }
-        #basket {
-            position: absolute; bottom: 10px; left: 50%; width: 60px; height: 20px;
-            background: var(--accent); border-radius: 10px; transform: translateX(-50%);
-            box-shadow: 0 0 15px var(--accent);
+        .garden-status-bar {
+            display: flex; justify-content: space-between; width: 100%; font-weight: bold;
+            color: var(--accent); font-size: 16px; margin-bottom: 15px; background: white;
+            padding: 10px 20px; border-radius: 18px; border: 1px solid var(--primary);
         }
-        .falling-heart-game {
-            position: absolute; font-size: 20px; top: 0; pointer-events: none;
+        .garden-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: 100%; max-width: 450px;
         }
-        .game-score {
-            position: absolute; top: 10px; right: 15px; color: white; font-weight: bold; font-size: 16px;
+        .garden-slot {
+            aspect-ratio: 1; background: #fff; border: 2px dashed var(--primary); border-radius: 20px;
+            display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer;
+            transition: 0.2s; position: relative; overflow: hidden;
         }
+        .garden-slot:hover { transform: scale(1.05); border-color: var(--accent); }
+        .garden-slot.active { background: #ffe4e6; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .garden-msg {
+            margin-top: 15px; font-weight: bold; color: var(--accent); font-size: 15px;
+            min-height: 25px; text-align: center; font-family: var(--font-poetic);
+        }
+
+        @keyframes popIn { 0% { transform: scale(0); } 80% { transform: scale(1.15); } 100% { transform: scale(1); } }
 
         /* ==========================================================================
            15. كوكبة النجوم التفاعلية (Constellation Canvas)
@@ -482,7 +491,6 @@
             padding: 14px; font-family: inherit; resize: none; outline: none; margin-bottom: 12px; font-size: 15px;
         }
 
-        /* اختبارات التوافق وعجلة الألعاب */
         .quiz-container { background: white; border-radius: 25px; padding: 22px; margin: 20px 0; border: 2px solid var(--primary); text-align: right; }
         .quiz-option {
             background: rgba(255, 133, 162, 0.1); border: 1.5px solid var(--primary); border-radius: 18px;
@@ -499,13 +507,13 @@
         @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* التجاوب مع مختلف الشاشات والهواتف */
         @media (max-width: 600px) {
             .timer-container { grid-template-columns: repeat(3, 1fr); gap: 6px; }
             .carousel-slide img { height: 280px; }
             .welcome-title { font-size: 28px; }
             .main-card { padding: 22px 15px; }
             .piano-key { width: 32px; height: 110px; font-size: 12px; }
+            .garden-grid { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
@@ -531,7 +539,7 @@
     </div>
 </div>
 
-<!-- مشغل الموسيقى العائم الفاخر -->
+<!-- مشغل الموسيقى العائم -->
 <div id="music-player-bar">
     <div class="player-info">
         <span><i class="fa-solid fa-heart-pulse"></i> أغنيتنا الخاصة - أسرار قلبي</span>
@@ -543,7 +551,6 @@
         <button class="player-btn" onclick="toggleMusic()" id="play-pause-btn"><i class="fa-solid fa-pause"></i></button>
         <button class="player-btn skip-btn" onclick="skipAudio(10)">+10s</button>
     </div>
-    <!-- أصوات الأجواء المحيطة -->
     <div class="ambient-selector">
         <span style="font-size: 11px; color: var(--text-muted); align-self: center;">الأجواء:</span>
         <button class="ambient-btn" id="btn-rain" onclick="toggleAmbient('rain')">🌧️ مطر</button>
@@ -551,19 +558,19 @@
     </div>
 </div>
 
-<!-- شاشة البداية والترحيب الأسطورية -->
+<!-- شاشة البداية والترحيب -->
 <div id="welcome-screen">
     <div class="welcome-box">
         <div class="welcome-title">🤍 يوم ما عرفنا بعض كان أسعد يوم في حياتي ❤️</div>
-        <div class="welcome-sub">مرحباً بكِ في عالمنا الفاخر المخصص لكِ وحدكِ.. حيث تم تشييد كل جزء هنا بحبي الشديد وشغفي بكِ.</div>
+        <div class="welcome-sub">مرحباً بكِ في عالمنا المخصص لكِ وحدكِ.. حيث تم تشييد كل جزء هنا بحبي الشديد وشغفي بكِ.</div>
         <button class="welcome-btn" onclick="showLogin()"><i class="fa-solid fa-key"></i> ادخلي يا عمري ✨</button>
     </div>
 </div>
 
-<!-- الحاوية الرئيسية للمحتوى الطويل (تظهر بعد الدخول) -->
+<!-- الحاوية الرئيسية للمحتوى (تظهر بعد الدخول) -->
 <div class="container" id="main-container">
 
-    <!-- كرت كلمة السر بأسلوب الأمان الفاخر -->
+    <!-- كرت كلمة السر بأسلوب الأمان -->
     <div class="main-card" id="login-card">
         <div style="font-size: 60px; margin-bottom: 15px; filter: drop-shadow(0 4px 10px var(--shadow));">🔒</div>
         <h2 style="color: var(--accent); margin-bottom: 8px; font-family: var(--font-title); font-size: 30px;">جاهزة يا Banouty؟</h2>
@@ -572,14 +579,14 @@
         <button class="welcome-btn" onclick="start()" style="width: 100%; justify-content: center;">فتح المفاجأة الكبرى ❤️</button>
     </div>
 
-    <!-- لوحة المحتوى الطويل الشاملة (تظهر بعد كلمة السر الصحيحة) -->
+    <!-- لوحة المحتوى الطويل الشاملة -->
     <div class="main-card" id="dashboard" style="display:none;">
 
         <!-- قسم الترحيب الرئيسي والرسالة العاطفية -->
         <p style="color: var(--accent); font-weight: bold; font-size: 22px; margin-top: 0; font-family: var(--font-title);">😂 اقفي هنا شوية متجريش.. الرحلة طويلة ومملوءة بالمفاجآت!</p>
         <p style="color: var(--primary); font-weight: bold; font-size: 18px; font-family: var(--font-poetic);">🤍 بحبك | ✨ بموت فيكي | 🔒 بعشقك للأبد</p>
 
-        <!-- العداد الزمني الموسع والدقيق للغاية -->
+        <!-- العداد الزمني الموسع -->
         <div class="section-header">
             <i class="fa-solid fa-hourglass-start"></i>
             <h3>عداد الحب والوقت الكوني</h3>
@@ -625,7 +632,7 @@
 
         <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.08); margin: 35px 0;">
 
-        <!-- الذكاء الاصطناعي الخاص بـ Banouty (AI Emotion Assistant) -->
+        <!-- الذكاء الاصطناعي الخاص بـ Banouty -->
         <div class="section-header">
             <i class="fa-solid fa-robot"></i>
             <h3>مستشار Banouty للقلوب</h3>
@@ -661,7 +668,7 @@
 
         <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.08); margin: 35px 0;">
 
-        <!-- التسلسل الزمني الفاخر للذكريات -->
+        <!-- التسلسل الزمني للذكريات -->
         <div class="section-header">
             <i class="fa-solid fa-route"></i>
             <h3>محطات في رحلتنا سوياً</h3>
@@ -693,21 +700,27 @@
             <h3>لماذا أنتي بعيني الدنيا كلها؟ (اكتشفي)</h3>
         </div>
         <p style="font-size: 13px; color: var(--text-muted);">اضغطي على كل كارت لاكتشاف السر المخبأ تحته:</p>
-        <div class="grid" id="reasons-grid">
-            <!-- سيتم إنشاؤها ديناميكياً بواسطة JavaScript للتأكد من الوفرة -->
-        </div>
+        <div class="grid" id="reasons-grid"></div>
 
         <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.08); margin: 35px 0;">
 
-        <!-- لعبة صيد القلوب الأركيد -->
+        <!-- لعبة مزرعة القلوب والورد المسلية الجديدة -->
         <div class="section-header">
-            <i class="fa-solid fa-gamepad"></i>
-            <h3>لعبة صيد قلوبي لكِ</h3>
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <h3>لعبة مزرعة الورد والقلوب المسلية 🌸🎮</h3>
         </div>
-        <button class="welcome-btn" onclick="toggleGame()" style="font-size: 15px; padding: 10px 25px;"><i class="fa-solid fa-play"></i> ابدئي اللعبة الآن 🎮</button>
-        <div class="game-box" id="game-box">
-            <div class="game-score">النقاط: <span id="game-score-val">0</span></div>
-            <div id="basket"></div>
+        <p style="font-size: 13px; color: var(--text-muted);">اجمعي الورد والقلوب المبهجة بسرعة قبل اختفائها واكتشفي مفاجآت الحب!</p>
+        <button class="welcome-btn" onclick="toggleGardenGame()" style="font-size: 15px; padding: 10px 25px;"><i class="fa-solid fa-gamepad"></i> ابدئي اللعبة المسلية الآن 🌷</button>
+        
+        <div class="garden-game-wrapper" id="garden-game-box">
+            <div class="garden-status-bar">
+                <span>الورود والقلوب 🌷: <span id="garden-score">0</span></span>
+                <span>المستوى ✨: <span id="garden-level">1</span></span>
+            </div>
+            <div class="garden-grid" id="garden-grid">
+                <!-- المربعات سيتم إنشاؤها عبر JavaScript -->
+            </div>
+            <div class="garden-msg" id="garden-message">اضغطي على الورود والقلوب فور ظهورها لقطف السعادة! 💖</div>
         </div>
 
         <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.08); margin: 35px 0;">
@@ -733,7 +746,7 @@
 
         <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.08); margin: 35px 0;">
 
-        <!-- معرض الصور التفصيلي الفاخر -->
+        <!-- معرض الصور التفصيلي -->
         <div class="section-header">
             <i class="fa-solid fa-book-open-reader"></i>
             <h3>رسائل تفصيلية مع صورنا</h3>
@@ -876,9 +889,9 @@
      ========================================================================== -->
 <script>
     /* --------------------------------------------------------------------------
-       أ. الإعدادات الأساسية والمتغيرات العامة
+       أ. الإعدادات الأساسية والمتغيرات العامة (تغيير الباسورد المطلوب)
        -------------------------------------------------------------------------- */
-    const P = "2082005"; // الباسورد الخاص بكما
+    const P = "2082005382006"; // الباسورد التحديثي الجديد
     const longMessageText = "يا رضوى، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑 كل ثانية معاكي هي بداية لعهد جديد من الحب والأمان المطق.";
     
     const audio = document.getElementById('music');
@@ -942,7 +955,7 @@
     /* --------------------------------------------------------------------------
        ج. العداد الكوني الفائق الدقة مع أجزاء الثواني
        -------------------------------------------------------------------------- */
-    const startDate = new Date(2026, 2, 14); // تاريخ بداية حبكما المفترض
+    const startDate = new Date(2026, 2, 14);
 
     function updateTimer() {
         const now = new Date();
@@ -962,7 +975,6 @@
         document.getElementById('timer-seconds').innerText = seconds;
         document.getElementById('timer-ms').innerText = ms < 10 ? '0' + ms : ms;
 
-        // إحصائيات تقريبية ممتعة
         const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
         document.getElementById('heartbeats-count').innerText = (totalDays * 115000 + hours * 4800).toLocaleString();
         document.getElementById('smiles-count').innerText = (totalDays * 45 + hours * 2).toLocaleString();
@@ -993,7 +1005,7 @@
             document.getElementById('login-card').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             
-            setInterval(updateTimer, 30); // تحديث فائق السرعة لأجزاء الثواني
+            setInterval(updateTimer, 30);
             loadSavedNote();
             generateReasonsGrid();
             initConstellation();
@@ -1002,7 +1014,7 @@
                 confetti({ particleCount: 180, spread: 100, origin: { y: 0.6 } });
             }
         } else { 
-            alert("الباسورد غلط يا روحي! 😉 ركزي ورجعي أفكارك تاريخ مميز بينا!"); 
+            alert("الباسورد غلط يا روحي! 😉 ركزي واكتبي الرقم صح!"); 
         }
     }
 
@@ -1118,63 +1130,91 @@
     }
 
     /* --------------------------------------------------------------------------
-       ط. لعبة صيد القلوب الأركيد
+       ط. اللعبة الجديدة: مزرعة القلوب والورد السحرية (Garden of Joy Game)
        -------------------------------------------------------------------------- */
-    let gameInterval;
-    let score = 0;
-    function toggleGame() {
-        const gBox = document.getElementById('game-box');
-        if(gBox.style.display === 'flex') {
-            gBox.style.display = 'none';
-            clearInterval(gameInterval);
+    let gardenScore = 0;
+    let gardenLevel = 1;
+    let gardenInterval;
+    const flowerTypes = ['🌹', '🌸', '🌺', '🌷', '🌻', '💐', '💖', '✨', '👑', '🎁'];
+    const gardenMessages = [
+        "قطفتِ أول وردة! بداية الجمال 🌸",
+        "يا سلام على السرعة! شاطرة جداً ✨",
+        "ورد الجوري طالع علشان خاطرك 🌹",
+        "انتي الملكة وأحلى وردة في المزرعة 👑",
+        "مستوى جديد! حبنا بيزدهر أكتر 💖",
+        "مفيش حد بيعرف يجمع ورد بالجمال ده غيرك! 💖"
+    ];
+
+    function toggleGardenGame() {
+        const gameBox = document.getElementById('garden-game-box');
+        if(gameBox.style.display === 'flex') {
+            gameBox.style.display = 'none';
+            clearInterval(gardenInterval);
         } else {
-            gBox.style.display = 'flex';
-            score = 0;
-            document.getElementById('game-score-val').innerText = score;
-            startGame();
+            gameBox.style.display = 'flex';
+            initGardenGame();
         }
     }
 
-    function startGame() {
-        const basket = document.getElementById('basket');
-        const gBox = document.getElementById('game-box');
-        
-        gBox.onmousemove = function(e) {
-            const rect = gBox.getBoundingClientRect();
-            let x = e.clientX - rect.left - 30;
-            if(x < 0) x = 0;
-            if(x > rect.width - 60) x = rect.width - 60;
-            basket.style.left = x + 'px';
-        };
+    function initGardenGame() {
+        const grid = document.getElementById('garden-grid');
+        grid.innerHTML = '';
+        gardenScore = 0;
+        gardenLevel = 1;
+        document.getElementById('garden-score').innerText = gardenScore;
+        document.getElementById('garden-level').innerText = gardenLevel;
 
-        gameInterval = setInterval(() => {
-            const heart = document.createElement('div');
-            heart.className = 'falling-heart-game';
-            heart.innerText = '💖';
-            heart.style.left = Math.random() * (gBox.clientWidth - 30) + 'px';
-            gBox.appendChild(heart);
+        for(let i = 0; i < 12; i++) {
+            const slot = document.createElement('div');
+            slot.className = 'garden-slot';
+            slot.dataset.id = i;
+            slot.onclick = () => catchFlower(slot);
+            grid.appendChild(slot);
+        }
 
-            let pos = 0;
-            let fallInt = setInterval(() => {
-                pos += 4;
-                heart.style.top = pos + 'px';
+        clearInterval(gardenInterval);
+        startGardenLoop();
+    }
 
-                // كشف التصادم
-                if(pos > gBox.clientHeight - 40) {
-                    let bLeft = parseFloat(basket.style.left || (gBox.clientWidth/2 - 30));
-                    let hLeft = parseFloat(heart.style.left);
-                    if(hLeft >= bLeft - 15 && hLeft <= bLeft + 60) {
-                        score += 10;
-                        document.getElementById('game-score-val').innerText = score;
-                        heart.remove();
-                        clearInterval(fallInt);
-                    } else if(pos > gBox.clientHeight - 10) {
-                        heart.remove();
-                        clearInterval(fallInt);
-                    }
-                }
-            }, 20);
-        }, 800);
+    function startGardenLoop() {
+        let speed = Math.max(1200 - (gardenLevel * 100), 500);
+        gardenInterval = setInterval(() => {
+            clearGardenSlots();
+            const slots = document.querySelectorAll('.garden-slot');
+            const randomSlot = slots[Math.floor(Math.random() * slots.length)];
+            const randomFlower = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+            
+            randomSlot.innerHTML = randomFlower;
+            randomSlot.classList.add('active');
+        }, speed);
+    }
+
+    function clearGardenSlots() {
+        const slots = document.querySelectorAll('.garden-slot');
+        slots.forEach(s => {
+            s.innerHTML = '';
+            s.classList.remove('active');
+        });
+    }
+
+    function catchFlower(slot) {
+        if(slot.classList.contains('active')) {
+            gardenScore += 10;
+            document.getElementById('garden-score').innerText = gardenScore;
+            slot.classList.remove('active');
+            slot.innerHTML = '✨';
+
+            if(gardenScore % 50 === 0) {
+                gardenLevel++;
+                document.getElementById('garden-level').innerText = gardenLevel;
+                if(typeof confetti === 'function') confetti({ particleCount: 50, spread: 60 });
+                clearInterval(gardenInterval);
+                startGardenLoop();
+            }
+
+            const msgIdx = Math.min(Math.floor(gardenScore / 30), gardenMessages.length - 1);
+            document.getElementById('garden-message').innerText = gardenMessages[msgIdx];
+        }
     }
 
     /* --------------------------------------------------------------------------
@@ -1320,7 +1360,7 @@
         "🎬 نتفرج على فيلم سوا ونطلب أكل بنحبه!",
         "🍦 نخرج ناكل أيس كريم ونتمشى تحت النجوم!",
         "☕ نعمل كباية شاي/قهوة ونقعد نتكلم بالساعات بدون توقف!",
-        "📸 نطلع نعمل سيشن صور جديد ونلتقط ذكريات فاخرة!",
+        "📸 نطلع نعمل سيشن صور جديد ونلتقط ذكريات جميلة!",
         "🎧 نسمع أغانينا المفضلة سوا ونسترخي!"
     ];
     function spinLoveWheel() {
