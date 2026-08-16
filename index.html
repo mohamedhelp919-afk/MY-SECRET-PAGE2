@@ -182,7 +182,6 @@
 <body>
 
 <audio id="music" loop><source src="LOVE.mp3" type="audio/mpeg"></audio>
-<audio id="voice-note"><source src="voice.mp3" type="audio/mpeg"></audio>
 
 <!-- مشغل الموسيقى المطور -->
 <div id="music-player-bar">
@@ -228,16 +227,7 @@
 
         <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
 
-        <!-- إضافة جديدة: تسجيل صوتي بصوتك -->
-        <h3 style="color: var(--accent);">🎙️ تسجيل صوتي مخصوص ليكي</h3>
-        <div class="secret-box">
-            <p style="font-size: 14px; color: #555;">دوسي هنا واسمعي بصوتي الكلام ده عشان تفتكريه دايماً 💖</p>
-            <button class="final-btn" id="voice-btn" onclick="toggleVoiceNote()">استماعي للرسالة الصوتية 🎧</button>
-        </div>
-
-        <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
-
-        <!-- إضافة جديدة: خط زمني لذكرياتكم -->
+        <!-- خط زمني لذكرياتكم -->
         <h3 style="color: var(--accent);">📖 محطات في رحلتنا سوياً</h3>
         <div class="timeline">
             <div class="timeline-item">
@@ -347,7 +337,7 @@
 
         <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
 
-        <!-- إضافة جديدة: قائمة الوعود الأبدية -->
+        <!-- قائمة الوعود الأبدية -->
         <h3 style="color: var(--accent);">💍 وعودي الأبدية ليكي</h3>
         <div class="grid">
             <div class="gift-card" style="border-color:#ff2e63" onclick="alert('وعد 1: هفضل أسمعك واحتويكي مهما كنت مشغول ❤️')"><span>وعد #1</span></div>
@@ -397,7 +387,6 @@
     const longMessageText = "يا رضوى، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑";
     
     const audio = document.getElementById('music');
-    const voiceNote = document.getElementById('voice-note');
     const seekBar = document.getElementById('seek-bar');
     const playBtn = document.getElementById('play-pause-btn');
 
@@ -422,26 +411,6 @@
             alert("الباسورد غلط يا روحي! 😉 ركزي ورجعي أفكارك"); 
         }
     }
-
-    /* تشغيل التسجيل الصوت الخاطف */
-    function toggleVoiceNote() {
-        const btn = document.getElementById('voice-btn');
-        if (voiceNote.paused) {
-            audio.pause(); // إيقاف الموسيقى الخلفية مؤقتاً
-            playBtn.innerHTML = '▶';
-            voiceNote.play();
-            btn.innerHTML = "إيقاف الرسالة الصوتية ⏸️";
-        } else {
-            voiceNote.pause();
-            btn.innerHTML = "استماعي للرسالة الصوتية 🎧";
-        }
-    }
-
-    voiceNote.onended = function() {
-        document.getElementById('voice-btn').innerHTML = "استماعي للرسالة الصوتية 🎧";
-        audio.play(); // إعادة تشغيل الموسيقى
-        playBtn.innerHTML = '⏸';
-    };
 
     /* مشغل الموسيقى */
     function toggleMusic() {
