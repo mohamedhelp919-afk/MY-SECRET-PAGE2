@@ -35,9 +35,17 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* القلوب المتساقطة */
+        /* القلوب المتساقطة والمتحركة مع اللمس */
         .heart { position: fixed; color: var(--accent); font-size: 20px; pointer-events: none; animation: fall linear forwards; z-index: 1; opacity: 0.6; }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+
+        .sparkle-heart {
+            position: fixed; pointer-events: none; font-size: 16px; animation: fadeOut 1s forwards; z-index: 9999;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(1.5) translateY(-20px); }
+        }
 
         /* شاشة البداية */
         #welcome-screen {
@@ -67,7 +75,7 @@
             box-shadow: 0 15px 35px rgba(255, 46, 99, 0.1);
         }
 
-        /* العداد الزمني المطور */
+        /* العداد الزمني */
         .timer-container { display: flex; justify-content: space-around; margin: 20px 0; gap: 5px; }
         .timer-box { background: rgba(255,255,255,0.8); padding: 12px 5px; border-radius: 20px; flex: 1; border: 1.5px solid var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .timer-box span { display: block; font-size: 20px; font-weight: bold; color: var(--accent); }
@@ -140,6 +148,13 @@
         .carousel-nav { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 10px; box-sizing: border-box; }
         .c-btn { background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 35px; height: 35px; font-weight: bold; cursor: pointer; color: var(--accent); }
 
+        /* خط زمني للذكريات */
+        .timeline { position: relative; padding-right: 20px; text-align: right; border-right: 3px solid var(--accent); margin: 20px 10px; }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item::after { content: '💖'; position: absolute; right: -29px; top: 0; background: white; border-radius: 50%; font-size: 14px; }
+        .timeline-date { font-weight: bold; color: var(--accent); font-size: 14px; }
+        .timeline-text { background: white; padding: 10px 15px; border-radius: 15px; margin-top: 5px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); font-size: 14px; }
+
         /* لعبة الـ Quiz */
         .quiz-option {
             background: white; border: 2px solid var(--primary); border-radius: 15px;
@@ -167,6 +182,7 @@
 <body>
 
 <audio id="music" loop><source src="LOVE.mp3" type="audio/mpeg"></audio>
+<audio id="voice-note"><source src="voice.mp3" type="audio/mpeg"></audio>
 
 <!-- مشغل الموسيقى المطور -->
 <div id="music-player-bar">
@@ -208,6 +224,34 @@
             <div class="timer-box"><span id="h">0</span><small>ساعة</small></div>
             <div class="timer-box"><span id="m">0</span><small>دقيقة</small></div>
             <div class="timer-box"><span id="s">0</span><small> ثانية</small></div>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
+
+        <!-- إضافة جديدة: تسجيل صوتي بصوتك -->
+        <h3 style="color: var(--accent);">🎙️ تسجيل صوتي مخصوص ليكي</h3>
+        <div class="secret-box">
+            <p style="font-size: 14px; color: #555;">دوسي هنا واسمعي بصوتي الكلام ده عشان تفتكريه دايماً 💖</p>
+            <button class="final-btn" id="voice-btn" onclick="toggleVoiceNote()">استماعي للرسالة الصوتية 🎧</button>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
+
+        <!-- إضافة جديدة: خط زمني لذكرياتكم -->
+        <h3 style="color: var(--accent);">📖 محطات في رحلتنا سوياً</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">أول يوم اتكلمنا فيه 💬</div>
+                <div class="timeline-text">بداية أجمل حكاية في حياتي، اليوم اللي نورتي فيه دنيتي.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">أول مرة اعترفتلك بحبي ❤️</div>
+                <div class="timeline-text">قلبي كان بيدق بسرعة، لكن كنت متأكد إنك أنتي العوض السعيد.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">واليوم وكل يوم ✨</div>
+                <div class="timeline-text">حبك بيزيد في قلبي أكتر من الأول ألف مرة.</div>
+            </div>
         </div>
 
         <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
@@ -293,7 +337,7 @@
 
         <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
 
-        <!-- إضافة نادرة 1: اختبار الحب التفاعلي (Interactive Love Quiz) -->
+        <!-- اختبار الحب التفاعلي -->
         <h3 style="color: var(--accent);">🧩 اختباري السريع ليكي!</h3>
         <div class="secret-box" id="quiz-box">
             <p style="font-weight: bold; color: var(--accent);" id="quiz-question">مين أكتر حد بيحبك في الدنيا دي كلها؟</p>
@@ -303,7 +347,18 @@
 
         <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
 
-        <!-- إضافة نادرة 2: مولد الأمنيات العشوائية (Love Oracle) -->
+        <!-- إضافة جديدة: قائمة الوعود الأبدية -->
+        <h3 style="color: var(--accent);">💍 وعودي الأبدية ليكي</h3>
+        <div class="grid">
+            <div class="gift-card" style="border-color:#ff2e63" onclick="alert('وعد 1: هفضل أسمعك واحتويكي مهما كنت مشغول ❤️')"><span>وعد #1</span></div>
+            <div class="gift-card" style="border-color:#ff85a2" onclick="alert('وعد 2: مش هسمح لأي حاجة تتعب قلبك أياً كانت 🌸')"><span>وعد #2</span></div>
+            <div class="gift-card" style="border-color:#ff2e63" onclick="alert('وعد 3: هفضل شايفك أجمل وأرقى ملكة في الدنيا دايماً ✨')"><span>وعد #3</span></div>
+            <div class="gift-card" style="border-color:#ff85a2" onclick="alert('وعد 4: هكون دايماً سندك وضهرك وأمانك لآخر العمر 👑')"><span>وعد #4</span></div>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
+
+        <!-- مولد الأمنيات العشوائية -->
         <h3 style="color: var(--accent);">🔮 بلورة الأمنيات والمستقبل</h3>
         <div class="oracle-box">
             <p id="oracle-text" style="font-size: 16px; font-weight: bold; color: #555;">اغلقي عينيك واضغطي على الزر لمعرفة ماذا يخبئ لك قلبي اليوم ✨</p>
@@ -312,7 +367,7 @@
 
         <hr style="border: 0; height: 1px; background: #ffe4e6; margin: 25px 0;">
 
-        <!-- إضافة نادرة 3: صندوق الرسائل السرية والملاحظات -->
+        <!-- صندوق الرسائل السرية -->
         <h3 style="color: var(--accent);">💌 صندوق الملاحظات السرية</h3>
         <p style="font-size: 14px; color: #777;">اضغطي على الأظرف الملونة لقراءة رسائل قصيرة خاصة جداً:</p>
         <div class="grid">
@@ -342,6 +397,7 @@
     const longMessageText = "يا رضوى، انتي مش بس حبيبتي، انتي الدنيا كلها في عيني.. من يوم ما عرفتك وحياتي نورت، هفضل أحبك لآخر نفس في عمري، وعد عليا هفضل جنبك ومعاكي وسندك، ربنا يخليكي ليا يا أجمل ملكة في الدنيا. ❤️👑";
     
     const audio = document.getElementById('music');
+    const voiceNote = document.getElementById('voice-note');
     const seekBar = document.getElementById('seek-bar');
     const playBtn = document.getElementById('play-pause-btn');
 
@@ -359,14 +415,33 @@
             document.getElementById('dashboard').style.display = 'block';
             setInterval(updateTimer, 1000);
             
-            // احتفال بالألعاب النارية عند الدخول الصح
             if(typeof confetti === 'function') {
-                confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
             }
         } else { 
             alert("الباسورد غلط يا روحي! 😉 ركزي ورجعي أفكارك"); 
         }
     }
+
+    /* تشغيل التسجيل الصوت الخاطف */
+    function toggleVoiceNote() {
+        const btn = document.getElementById('voice-btn');
+        if (voiceNote.paused) {
+            audio.pause(); // إيقاف الموسيقى الخلفية مؤقتاً
+            playBtn.innerHTML = '▶';
+            voiceNote.play();
+            btn.innerHTML = "إيقاف الرسالة الصوتية ⏸️";
+        } else {
+            voiceNote.pause();
+            btn.innerHTML = "استماعي للرسالة الصوتية 🎧";
+        }
+    }
+
+    voiceNote.onended = function() {
+        document.getElementById('voice-btn').innerHTML = "استماعي للرسالة الصوتية 🎧";
+        audio.play(); // إعادة تشغيل الموسيقى
+        playBtn.innerHTML = '⏸';
+    };
 
     /* مشغل الموسيقى */
     function toggleMusic() {
@@ -397,7 +472,7 @@
 
     /* العداد الزمني */
     function updateTimer() {
-        const diff = new Date() - new Date(2026, 2, 14); // التاريخ القديم
+        const diff = new Date() - new Date(2026, 2, 14);
         document.getElementById('d').innerText = Math.floor(diff / 86400000);
         document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
         document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
@@ -418,6 +493,21 @@
         }, 300);
     }
 
+    /* حركة الماوس أو التاتش المضيئة بالقلوب */
+    document.addEventListener('touchmove', function(e) { createSparkle(e.touches[0].clientX, e.touches[0].clientY); });
+    document.addEventListener('mousemove', function(e) { createSparkle(e.clientX, e.clientY); });
+
+    function createSparkle(x, y) {
+        if(Math.random() > 0.3) return; // لعدم إثقال الشاشة
+        const el = document.createElement('div');
+        el.className = 'sparkle-heart';
+        el.innerHTML = '💗';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1000);
+    }
+
     /* كتابة النص الآلي */
     let i = 0;
     function typeWriter() {
@@ -434,7 +524,7 @@
         i = 0; 
         typeWriter();
         if(typeof confetti === 'function') {
-            confetti({ particleCount: 80, spread: 60 });
+            confetti({ particleCount: 100, spread: 70 });
         }
     }
     
